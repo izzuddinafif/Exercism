@@ -11,7 +11,7 @@
  * @returns {boolean} whether a license is required
  */
 export function needsLicense(kind) {
-  throw new Error('Please implement the needsLicense function');
+  return kind === 'car' || kind === 'truck' 
 }
 
 /**
@@ -23,8 +23,10 @@ export function needsLicense(kind) {
  * @returns {string} a sentence of advice which option to choose
  */
 export function chooseVehicle(option1, option2) {
-  throw new Error('Please implement the chooseVehicle function');
+  const s = ' is clearly the better choice.'
+  return option1 < option2 ? option1+s : option2+s
 }
+console.log(chooseVehicle('Wuling Hongguang', 'Toyota Corolla'))
 
 /**
  * Calculates an estimate for the price of a used vehicle in the dealership
@@ -35,5 +37,5 @@ export function chooseVehicle(option1, option2) {
  * @returns {number} expected resell price in the dealership
  */
 export function calculateResellPrice(originalPrice, age) {
-  throw new Error('Please implement the calculateResellPrice function');
+  return age < 3 ? 0.8 *originalPrice: age > 10 ? originalPrice* 0.5 : originalPrice * 0.7
 }
