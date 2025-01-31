@@ -6,4 +6,6 @@ pnpm-lock.yaml
 *.sh
 *.ini
 .*
+.pytest_cache/
 __pycache__/
+venv/
