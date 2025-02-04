@@ -55,4 +55,5 @@ def clean_up(combined_record_group):
     # s = ""
     # for inner in combined_record_group:
     #     s += str( tuple(v for j, v in enumerate(inner) if j != 1)) + "\n"
+    # return s
     return ''.join(f"{(record[0], *record[2:])}\n" for record in combined_record_group)

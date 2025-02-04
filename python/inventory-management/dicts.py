@@ -8,7 +8,7 @@ def create_inventory(items):
     :return: dict - the inventory dictionary.
     """
     
-    return {z: items.count(z) for z in tuple(items)}
+    return {item: items.count(item) for item in set(items)}
 print(create_inventory(["coal", "wood", "wood", "diamond", "diamond", "diamond"]))
 
 def add_items(inventory, items):
@@ -18,8 +18,12 @@ def add_items(inventory, items):
     :param items: list - list of items to update the inventory with.
     :return: dict - the inventory updated with the new items.
     """
+    for item in items:
+        inventory[item] = inventory.get(item, 0) + 1
+    return inventory
 
-    pass
+print(add_items({"coal":1}, ["wood", "iron", "coal", "wood"]))
+    
 
 
 def decrement_items(inventory, items):
@@ -29,8 +33,13 @@ def decrement_items(inventory, items):
     :param items: list - list of items to decrement from the inventory.
     :return: dict - updated inventory with items decremented.
     """
+    for item in items:
+        x =  inventory.get(item, 0)
+        if x > 0:
+            inventory[item] = x - 1
 
-    pass
+    return inventory
+print(decrement_items({"coal":2, "wood":1, "diamond":2}, ["coal", "coal", "wood", "wood", "diamond"]))
 
 
 def remove_item(inventory, item):
@@ -41,8 +50,10 @@ def remove_item(inventory, item):
     :return: dict - updated inventory with item removed. Current inventory if item does not match.
     """
 
-    pass
+    inventory.pop(item, None)
+    return inventory
 
+print(remove_item({"coal":2, "wood":1, "diamond":2}, "coal"))
 
 def list_inventory(inventory):
     """Create a list containing only available (item_name, item_count > 0) pairs in inventory.
@@ -51,5 +62,6 @@ def list_inventory(inventory):
     :return: list of tuples - list of key, value pairs from the inventory dictionary.
     """
 
-    pass
+    return [(k, v) for k, v in inventory.items() if v > 0]
+print(list_inventory({"coal":7, "wood":11, "diamond":2, "iron":7, "silver":0}))
 
