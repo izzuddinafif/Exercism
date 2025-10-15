@@ -1,0 +1,21 @@
+name: Enable Auto-Merge for Exercism Bot
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - ready_for_review
+
+jobs:
+  enable-automerge:
+    runs-on: ubuntu-latest
+    # This condition ensures the action only runs for PRs created by the exercism bot.
+    # Note: Bot names often have '[bot]' at the end. Check the exact actor name in the Actions tab if this fails.
+    if: github.actor == 'exercism-solutions-syncer[bot]'
+    steps:
+      - name: Enable auto-merge for PR
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: merge # Or 'squash' or 'rebase'
